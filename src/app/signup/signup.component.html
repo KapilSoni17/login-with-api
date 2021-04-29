@@ -1,0 +1,98 @@
+<div id="main">
+
+   <form [formGroup]="form" (submit)="submitForm()">
+
+  <div class="form-group" >
+
+
+    <p>
+      <label for="name"> Full Name:</label>
+      <input type="text" name="name" class="form-control" formControlName="name" id="name" placeholder="Enter Your Name">
+    </p>
+
+  <div *ngIf="form.controls['name'].invalid && (form.controls['name']?.dirty || form.controls['name']?.touched)" class="red">
+    <div *ngIf="form.controls['name'].errors?.required">Name is required</div>
+    <div *ngIf="form.controls['name'].errors?.minlength">Name should contain atleast 8 char.</div>
+  </div>
+<hr>
+
+  <p>
+    <label for="email">Email:</label>
+    <input type="email" name="email" placeholder="Enter Your Email" formControlName="email" class="form-control" required pattern="^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+  </p>
+
+<div *ngIf="form.controls['email'].invalid && (form.controls['email']?.dirty || form.controls['email']?.touched)" class="red">
+  <div *ngIf="form.controls['email'].errors?.required">Email is required</div>
+  <div *ngIf="form.controls['email'].errors?.pattern">Pattern is wrong </div>
+</div><hr>
+
+
+<p>
+  <label for = "password">Password:</label>
+  <input type="password" name="password" placeholder="Enter A Password" class="form-control" formControlName="password" id="password" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!#^~%*?&])[A-Za-z\d$@$!%*?&].{8,}">
+</p>
+
+<div *ngIf="form.controls['password'].invalid && (form.controls['password']?.dirty || form.controls['password']?.touched)" class="red" >
+<div *ngIf="form.controls['password'].errors?.required">Password is required</div>
+<div *ngIf="form.controls['password'].errors?.minlength">Password should contain atleast 8 char.</div>
+<div *ngIf="form.controls['password'].errors?.maxlength">Password should not contain 12 char.</div>
+<div *ngIf="form.controls['password'].errors?.pattern">Pattern is wrong </div>
+</div><hr>
+
+
+<div>
+<p>
+  <label for="confirm_password" id="fm">Confirm Password:</label>
+  <input class ="form-control" type="password" placeholder="confirm Password" formControlName="confirm_password">
+</p>
+<div *ngIf="form.controls['confirm_password'].errors?.mustMatch"  class="red" >Please Enter Same Password</div>
+</div><hr>
+
+<div>
+  <p>
+    <label for="phone_number" id="pn">Phone Number:</label>
+  <input class ="form-control" placeholder=" Enter Phone Number" formControlName="phone_number" required >
+  </p>
+<div class="red">
+  <div *ngIf="form.controls['phone_number'].errors?.minlength">Please Enter A valid Number</div>
+</div>
+</div><hr>
+
+<div>
+  <p>
+    <label for="postcode" id="pc"> Enter Post Code: </label>
+  <input class ="form-control" placeholder=" Enter Postcode" formControlName="postcode" required >
+  </p>
+</div><hr>
+
+<div>
+  <p>
+    <label for="daycare_id" id="dc"> Select Id:</label>&nbsp;&nbsp;
+    <select class="form-control" formControlName="daycare_id" required>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+    </select>
+  </p>
+</div><hr>
+
+<div>
+  <label for="image" id="im">Upload Image:</label>&nbsp;&nbsp;
+  <input class="form-control" type="file" (change)="uploadFile($event)"><br>
+
+</div><hr>
+
+
+<div>
+  <p>
+    <label for="role_id" id="ri">Enter Role Id:</label>&nbsp;&nbsp;
+    <input class="form-control" placeholder="Role Id" formControlName="role_id" required>
+  </p>
+</div>
+</div><hr>
+
+<div>
+  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+</div>
+</form>
+</div>

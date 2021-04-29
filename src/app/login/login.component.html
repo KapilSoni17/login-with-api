@@ -1,0 +1,33 @@
+<div id="main">
+<form [formGroup]="form" (submit)="submit()">
+ <div class="form-group" >
+
+
+  <p>
+    <label for="email">Email:</label>
+    <input type="email" name="email" placeholder="Enter Your Email" formControlName="email" class="form-control" required pattern="^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+  </p>
+
+<div *ngIf="form.controls['email'].invalid && (form.controls['email']?.dirty || form.controls['email']?.touched)" class="red">
+  <div *ngIf="form.controls['email'].errors?.required">Email is required</div>
+  <div *ngIf="form.controls['email'].errors?.pattern">Pattern is wrong </div>
+</div>
+
+
+<p>
+  <label for = "password">Password:</label>
+  <input type="password" name="password" placeholder="Enter A Password" class="form-control" formControlName="password" id="password" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!#^~%*?&])[A-Za-z\d$@$!%*?&].{8,}">
+</p>
+
+<div *ngIf="form.controls['password'].invalid && (form.controls['password']?.dirty || form.controls['password']?.touched)" class="red" >
+<div *ngIf="form.controls['password'].errors?.required">Password is required</div>
+<div *ngIf="form.controls['password'].errors?.minlength">Password should contain atleast 8 char.</div>
+<div *ngIf="form.controls['password'].errors?.maxlength">Password should not contain 12 char.</div>
+<div *ngIf="form.controls['password'].errors?.pattern">Pattern is wrong </div>
+</div>
+</div>
+
+
+<div> <button (click)="submit()">Submit</button></div>
+</form>
+</div>
